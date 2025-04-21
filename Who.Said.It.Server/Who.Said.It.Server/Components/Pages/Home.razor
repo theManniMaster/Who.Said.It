@@ -1,7 +1,19 @@
 ﻿@page "/"
+@using Who.Said.It.Server.Services.Interfaces
+@inject IPdfToTextService _pdfToTextService
 
-<PageTitle>Home</PageTitle>
+@code {
+    string HtmlContent { get; set; } = string.Empty;
 
-<h1>Hello, world!</h1>
+    protected override void OnInitialized()
+    {
+        HtmlContent = _pdfToTextService.GetTextFromPdf("avengers-endgame-2019.pdf");
+    }
+}
 
-Welcome to your new app.
+
+<h1>Hello World!</h1>
+
+<p>
+    @HtmlContent
+</p>
