@@ -1,10 +1,14 @@
 using Who.Said.It.Server.Components;
+using Who.Said.It.Server.Services;
+using Who.Said.It.Server.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddTransient<IPdfToTextService, PdfToTextService>();
 
 var app = builder.Build();
 
