@@ -1,5 +1,37 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+@code {
+    private MudTheme _theme = new MudTheme()
+    {
+        Typography =
+        {
+            Default = new DefaultTypography()
+            {
+                FontFamily = ["Inter", "Roboto", "Helvetica", "Arial", "sans-serif"],
+                LineHeight = "2"
+            },
+            H2 = new H2Typography()
+            {
+                FontWeight = "500",
+                LineHeight = "1.5",
+            },
+            H6 = new H6Typography()
+            {
+                FontWeight = "400",
+                LineHeight = "2"
+            }
+        },
+        PaletteLight =
+        {
+            Black = "#000000",
+            TextPrimary = "#000000",
+            Primary = "#000000",
+        },
+    };
+}
+
+<MudThemeProvider Theme="_theme" />
+
+<MudMainContent>
     @Body
-</div>
+</MudMainContent>
