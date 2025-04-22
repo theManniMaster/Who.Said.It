@@ -1,0 +1,41 @@
+﻿@page "/search"
+@rendermode InteractiveServer
+
+@code {
+    private string _textValue { get; set; } = string.Empty;
+
+    private async Task<IEnumerable<string>> HandleSearch(string value, CancellationToken token)
+    {
+        await Task.Delay(2000);
+
+        return (new List<string> {  }).Where(i => i.Contains(value));
+    }
+}
+
+<MudPopoverProvider />
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudGrid Justify="Justify.Center" Spacing="10">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h4"
+                     Align="Align.Center">
+                <b>Type in a quote - we'll find where it's from.</b>
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudAutocomplete Label="Search" 
+                             @bind-Value="_textValue"
+                             CoerceValue="true"
+                             SearchFunc="HandleSearch"
+                             ShowProgressIndicator="true"
+                             AdornmentIcon="@Icons.Material.Filled.Search">
+                <ProgressIndicatorTemplate>
+                    <MudProgressLinear Size="Size.Small"
+                                       Indeterminate="true"
+                                       Color="Color.Primary" />
+                </ProgressIndicatorTemplate>
+            </MudAutocomplete>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
