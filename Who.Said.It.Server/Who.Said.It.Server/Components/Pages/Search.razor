@@ -1,17 +1,16 @@
 ﻿@page "/search"
 @rendermode InteractiveServer
+@inject IDialogueSearchService _dialogueSearchService
 
 @code {
     private string _textValue { get; set; } = string.Empty;
+    private const int _maxResults = 5;
 
     private async Task<IEnumerable<string>> HandleSearch(string value, CancellationToken token)
     {
-        await Task.Delay(2000);
+        // do i need _textValue and CancellationToken here?
 
-        return (new List<string> {  }).Where(i => i.Contains(value));
-
-        // get top 5 search results for provided value to be displayed in autocomplete.
-
+        return await _dialogueSearchService.SearchTopNDialoguesAsync(value, _maxResults, token);
     }
 }
 
